@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
               allProductRepo:
               ServicesLocator.getIt.get<AllProductImplementation>()),
         ),
-        BlocProvider(create: (context) => ScanBarCodeCubit(),)
       ],
       child: MaterialApp(
         home:BuildScan()
