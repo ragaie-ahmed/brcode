@@ -1,6 +1,6 @@
+import 'package:Alaqsa/Features/HomeScreen/data/Model/Searchproduct.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/Model/Searchproduct.dart';
 
 class GenerateBarCode extends StatelessWidget {
    GenerateBarCode({super.key,required this.searchproduct});

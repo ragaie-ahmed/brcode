@@ -1,10 +1,10 @@
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/View/SearchProduct/Screens/generateBarCode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/generateBarCode.dart';
-import 'package:flutterscanner/main.dart';
+
 
 class SearchBarcode extends StatefulWidget {
   const SearchBarcode({super.key, required this.barcode});

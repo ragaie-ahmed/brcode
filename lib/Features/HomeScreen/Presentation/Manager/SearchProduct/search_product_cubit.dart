@@ -1,9 +1,9 @@
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/Model/Searchproduct.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/repo/HomeRepo.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/Model/Searchproduct.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/repo/HomeRepo.dart';
 
 class SearchProductCubit extends Cubit<SearchProductState> {
   SearchProductCubit({required this.allProductRepo}) : super(SearchProductInitial());
@@ -18,7 +18,7 @@ class SearchProductCubit extends Cubit<SearchProductState> {
 searchproduct=result;
 emit(SuccessSearch());
     }catch(e){
-      emit(ErrorSearch(error: e.toString()));
+      emit(ErrorSearch(error: "Product is currently unavailable"));
     }
 
   }

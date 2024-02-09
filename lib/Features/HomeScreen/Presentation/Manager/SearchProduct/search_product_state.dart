@@ -1,6 +1,6 @@
 
 
-import 'package:flutterscanner/Features/HomeScreen/data/Model/Searchproduct.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/Model/Searchproduct.dart';
 
 abstract class SearchProductState {}
 

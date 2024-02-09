@@ -1,14 +1,15 @@
+import 'package:Alaqsa/Core/utils/Bloc_observer.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/AllProductCubit/all_product_cubit.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/Scan/scan_bar_code_cubit.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/View/AllProduct/Screens/AllProduct.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/repo/HomeRepoImple.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterscanner/Core/utils/Bloc_observer.dart';
-import 'package:flutterscanner/Core/utils/Locator.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/AllProductCubit/all_product_cubit.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/Scan/scan_bar_code_cubit.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/View/AllProduct/Screens/AllProduct.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/repo/HomeRepoImple.dart';
+
+import 'Core/utils/Locator.dart';
 
 void main() {
  ServicesLocator.setupServiceLocator();
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ScanBarCodeCubit(),)
       ],
       child: MaterialApp(
-        home:AllProduct()
+        home:BuildScan()
       ),
     );
   }

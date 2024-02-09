@@ -1,9 +1,9 @@
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
 
 class DetailsSearch extends StatefulWidget {
    DetailsSearch({super.key,required this.barcode});
@@ -39,7 +39,7 @@ SearchProductCubit.get(context).getSearchProduct(widget.barcode);
              return Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 Image.asset("Assets/Images/images.jpg"),
+                 Image.asset("Assets/Images/6770245.png"),
                  Padding(
                    padding: const EdgeInsets.all(15.0),
                    child: Text(

@@ -1,7 +1,7 @@
-import 'package:flutterscanner/Core/utils/Api_Services.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/Model/AllProduct.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/Model/Searchproduct.dart';
-import 'package:flutterscanner/Features/HomeScreen/data/repo/HomeRepo.dart';
+import 'package:Alaqsa/Core/utils/Api_Services.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/Model/AllProduct.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/Model/Searchproduct.dart';
+import 'package:Alaqsa/Features/HomeScreen/data/repo/HomeRepo.dart';
 
 class AllProductImplementation implements AllProductRepo{
   @override

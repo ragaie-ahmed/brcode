@@ -1,5 +1,4 @@
 
-import 'package:flutterscanner/Features/HomeScreen/data/Model/AllProduct.dart';
 
 abstract class AllProductState {}
 class AllProductInitial extends AllProductState {}
