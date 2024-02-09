@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/AllProductCubit/all_product_cubit.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/AllProductCubit/all_product_state.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/View/AllProduct/Screens/bodyAllProduct.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBardCode.dart';
+import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/SearchBarcode.dart';
 
 class AllProduct extends StatelessWidget {
@@ -21,7 +22,7 @@ class AllProduct extends StatelessWidget {
           var cubit=AllProductCubit.get(context);
           return Column(
             children: [
-              MyApp1(),
+              // Expanded(child: BuildScan()),
               GridView.builder(
                 gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                 itemCount: cubit.listProduct.length,

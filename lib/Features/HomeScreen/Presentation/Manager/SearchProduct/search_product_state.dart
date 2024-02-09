@@ -15,3 +15,9 @@ class ErrorSearch extends SearchProductState{
   ErrorSearch({required this.error});
 
 }
+class SearchSuccess extends SearchProductState{
+  final Searchproduct searchproduct;
+
+  SearchSuccess({required this.searchproduct});
+
+}

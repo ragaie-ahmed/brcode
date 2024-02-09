@@ -18,6 +18,7 @@ class AllProductCubit extends Cubit<AllProductState> {
 
     } catch(e){
       emit(ErrorFetch(error: e.toString()));
+      print(e.toString());
     }
   }
 }

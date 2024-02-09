@@ -7,20 +7,20 @@ class ScanBarCodeCubit extends Cubit<ScanBarCodeState> {
   ScanBarCodeCubit() : super(ScanBarCodeInitial());
 
   static ScanBarCodeCubit get(context) => BlocProvider.of(context);
-  String? scanBarcode;
+  String? barcodeScanRes;
 
 
   Future<void> scanQR() async {
-    String barcodeScanRes;
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-      print(barcodeScanRes);
-    } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
+        '#ff6666', 'Cancel', true, ScanMode.BARCODE,
+      );
+      print("Barcode Scanned: $barcodeScanRes");
+    } on PlatformException catch (e) {
+      print("Error scanning barcode: $e");
+      barcodeScanRes = null; // Set barcodeScanRes to null in case of an error
     }
-
-    scanBarcode = barcodeScanRes;
+    emit(ChangeState1());
   }
 
 }

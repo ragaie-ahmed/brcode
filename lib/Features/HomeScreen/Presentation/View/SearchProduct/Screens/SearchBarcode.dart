@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
-import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBardCode.dart';
+import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
 import 'package:flutterscanner/Features/HomeScreen/Presentation/View/SearchProduct/Screens/generateBarCode.dart';
 import 'package:flutterscanner/main.dart';
 
@@ -29,12 +29,19 @@ class _SearchBarcodeState extends State<SearchBarcode> {
       body: BlocBuilder<SearchProductCubit, SearchProductState>(
         builder: (context, state) {
           var cubit=SearchProductCubit.get(context);
+         if(state is SuccessSearch){
            return Column(
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
                GenerateBarCode(searchproduct: cubit.searchproduct!),
+               BuildScan()
              ],
            );
+         }
+         else if(state is ErrorSearch){
+           return Center(child: Text(state.error),);
+         }
+         return Center(child: CircularProgressIndicator());
 
         },
       ),

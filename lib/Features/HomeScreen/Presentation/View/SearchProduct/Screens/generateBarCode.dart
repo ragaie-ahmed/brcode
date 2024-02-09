@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterscanner/Features/HomeScreen/data/Model/Searchproduct.dart';
 
 class GenerateBarCode extends StatelessWidget {
-  const GenerateBarCode({super.key,required this.searchproduct});
+   GenerateBarCode({super.key,required this.searchproduct});
  final Searchproduct searchproduct;
   @override
   Widget build(BuildContext context) {
