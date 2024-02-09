@@ -4,6 +4,7 @@ import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/Scan/scan_bar_co
 import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
 import 'package:Alaqsa/Features/HomeScreen/Presentation/View/AllProduct/Screens/AllProduct.dart';
 import 'package:Alaqsa/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/View/SplashScreen/SplashScreen.dart';
 import 'package:Alaqsa/Features/HomeScreen/data/repo/HomeRepoImple.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +34,12 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchProductCubit(
               allProductRepo:
               ServicesLocator.getIt.get<AllProductImplementation>()),
+          
         ),
       ],
       child: MaterialApp(
-        home:BuildScan()
+        debugShowCheckedModeBanner: false,
+        home:SplashScreen()
       ),
     );
   }
