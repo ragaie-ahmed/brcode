@@ -19,7 +19,7 @@ class AllProduct extends StatelessWidget {
       body: BlocBuilder<AllProductCubit,AllProductState>(builder: (context, state) {
         if(state is SuccessFetch){
           var cubit=AllProductCubit.get(context);
-          return Column(
+          return ListView(
             children: [
               // Expanded(child: BuildScan()),
               GridView.builder(

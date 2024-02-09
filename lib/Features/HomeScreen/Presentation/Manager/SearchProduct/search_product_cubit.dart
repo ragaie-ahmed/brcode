@@ -18,7 +18,7 @@ class SearchProductCubit extends Cubit<SearchProductState> {
 searchproduct=result;
 emit(SuccessSearch());
     }catch(e){
-      emit(ErrorSearch(error: "Product is currently unavailable"));
+      emit(ErrorSearch(error: "المنتج غير متاح الان"));
     }
 
   }

@@ -34,7 +34,6 @@ class _SearchBarcodeState extends State<SearchBarcode> {
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
                GenerateBarCode(searchproduct: cubit.searchproduct!),
-               BuildScan()
              ],
            );
          }
