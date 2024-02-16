@@ -59,8 +59,10 @@ class _BuildScanState extends State<BuildScan> {
                 'فتح الماسح الضوئي',
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
+
             ),
           ),
+
         ],
       ),
     );

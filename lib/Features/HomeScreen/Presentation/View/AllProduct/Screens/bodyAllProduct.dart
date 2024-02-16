@@ -1,5 +1,4 @@
 import 'package:Alaqsa/Features/HomeScreen/data/Model/AllProduct.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BodyAllProduct extends StatelessWidget {
