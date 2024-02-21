@@ -5,6 +5,7 @@ class LoginModel {
       this.type, 
       this.email, 
       this.emailVerifiedAt, 
+      this.password, 
       this.image, 
       this.phone, 
       this.userSelral, 
@@ -20,6 +21,7 @@ class LoginModel {
     type = json['type'];
     email = json['email'];
     emailVerifiedAt = json['email_verified_at'];
+    password = json['password'];
     image = json['image'];
     phone = json['phone'];
     userSelral = json['userSelral'];
@@ -34,6 +36,7 @@ class LoginModel {
   num? type;
   String? email;
   dynamic emailVerifiedAt;
+  String? password;
   String? image;
   String? phone;
   num? userSelral;
@@ -47,6 +50,7 @@ LoginModel copyWith({  num? id,
   num? type,
   String? email,
   dynamic emailVerifiedAt,
+  String? password,
   String? image,
   String? phone,
   num? userSelral,
@@ -60,6 +64,7 @@ LoginModel copyWith({  num? id,
   type: type ?? this.type,
   email: email ?? this.email,
   emailVerifiedAt: emailVerifiedAt ?? this.emailVerifiedAt,
+  password: password ?? this.password,
   image: image ?? this.image,
   phone: phone ?? this.phone,
   userSelral: userSelral ?? this.userSelral,
@@ -76,6 +81,7 @@ LoginModel copyWith({  num? id,
     map['type'] = type;
     map['email'] = email;
     map['email_verified_at'] = emailVerifiedAt;
+    map['password'] = password;
     map['image'] = image;
     map['phone'] = phone;
     map['userSelral'] = userSelral;

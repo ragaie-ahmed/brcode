@@ -1,8 +1,9 @@
-import 'package:Alaqsa/Core/utils/LocalStorage.dart';
+import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/FetchData/cache_data_cubit.dart';
 import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
 import 'package:Alaqsa/Features/HomeScreen/data/Model/AllProduct.dart';
 import 'package:Alaqsa/Features/HomeScreen/data/Model/Searchproduct.dart';
 import 'package:Alaqsa/Features/HomeScreen/data/repo/HomeRepo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -17,49 +18,26 @@ class SearchProductCubit extends Cubit<SearchProductState> {
 
   AllProduct? allProduct;
 
-  Future<void> getSearchProduct(String barcode) async {
+  Future<void> getSearchProduct(String barcode, BuildContext context) async {
     emit(LoadingSearch());
     try {
       if (await InternetConnectionChecker().hasConnection) {
         var result = await allProductRepo.searchProduct(barcode: barcode);
         searchproduct = result;
-        var results = await allProductRepo.fetchAllProduct();
-        listProduct = results;
-        await saveProductsToHive(listProduct);
         emit(SuccessSearch());
       } else {
-        searchProductByBarcode(barcode);
-        emit(CacheSuccess());
-      }
-    } catch (e) {
-      emit(ErrorSearch(error: e.toString()));
-      print(e.toString());
-    }
-  }
-
-  Future<AllProduct?> searchProductByBarcode(String barcode) async {
-    try {
-      List<AllProduct> products = await getProductsFromHive();
-
-      if (products.isNotEmpty) {
-        allProduct = products.firstWhere(
-          (element) => element.barcode == barcode,
-          orElse: () => AllProduct(id: 0, title: "", barcode: ''),
-        );
-
+        allProduct =
+            await CacheDataCubit.get(context).searchProductByBarcode(barcode);
         if (allProduct != null) {
+          emit(CacheSuccess());
         } else {
-          emit(ErrorSearch(error: 'يوجد خطأ فى الماسح : $barcode'));
+          emit(ErrorSearch(
+              error: 'Cache retrieval failed for barcode: $barcode'));
         }
-      } else {
-        emit(ErrorSearch(error: 'المنتج غير متاح الان '));
       }
     } catch (e) {
-      // Handle errors
       emit(ErrorSearch(error: e.toString()));
       print(e.toString());
-      return null;
     }
-    return null;
   }
 }
