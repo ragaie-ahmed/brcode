@@ -4,6 +4,7 @@ part 'AllProduct.g.dart';
 class AllProduct extends HiveObject {
   AllProduct({
     this.id,
+    this.adminId,
     this.title,
     this.barcode,
     this.description,
@@ -14,6 +15,7 @@ class AllProduct extends HiveObject {
 
   AllProduct.fromJson(dynamic json) {
     id = json['id'];
+    adminId = json['admin_id'];
     title = json['title'];
     barcode = json['barcode'];
     description = json['description'];
@@ -25,36 +27,21 @@ class AllProduct extends HiveObject {
   @HiveField(0)
   num? id;
   @HiveField(1)
-  String? title;
+  num? adminId;
   @HiveField(2)
-  String? barcode;
+  String? title;
   @HiveField(3)
-  String? description;
+  String? barcode;
   @HiveField(4)
-  String? price;
+  String? description;
   @HiveField(5)
-  String? createdAt;
+  String? price;
   @HiveField(6)
+  String? createdAt;
+  @HiveField(7)
   String? updatedAt;
 
-  AllProduct copyWith({
-    num? id,
-    String? title,
-    String? barcode,
-    String? description,
-    String? price,
-    String? createdAt,
-    String? updatedAt,
-  }) =>
-      AllProduct(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        barcode: barcode ?? this.barcode,
-        description: description ?? this.description,
-        price: price ?? this.price,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-      );
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -65,6 +52,7 @@ class AllProduct extends HiveObject {
     map['price'] = price;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
+    map['admin_id'] = adminId;
     return map;
   }
 }

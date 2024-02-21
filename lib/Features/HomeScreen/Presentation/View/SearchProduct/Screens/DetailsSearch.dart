@@ -1,9 +1,11 @@
+import 'package:Alaqsa/Core/utils/Const.dart';
 import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_cubit.dart';
 import 'package:Alaqsa/Features/HomeScreen/Presentation/Manager/SearchProduct/search_product_state.dart';
 import 'package:Alaqsa/Features/HomeScreen/Presentation/View/SearchProduct/Screens/BuildScanBarCode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
+
 class DetailsSearch extends StatefulWidget {
   DetailsSearch({super.key, required this.barcode});
 
@@ -16,119 +18,199 @@ class DetailsSearch extends StatefulWidget {
 class _DetailsSearchState extends State<DetailsSearch> {
   @override
   void initState() {
-    SearchProductCubit.get(context).getSearchProduct(widget.barcode);
+    SearchProductCubit.get(context).getSearchProduct(widget.barcode, context);
     super.initState();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<SearchProductCubit, SearchProductState>(
+      body: BlocConsumer<SearchProductCubit, SearchProductState>(
+        listener: (context, state) {},
         builder: (context, state) {
           var cubit = SearchProductCubit.get(context);
 
           if (state is SuccessSearch) {
-            return SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+            final adminId = cubit.searchproduct!.adminId;
+            final currentUserId = AppConstant.userid;
+// ToDo: Figure out whuy userId is always null?!
+            if (adminId == currentUserId) {
+              if (cubit.searchproduct != null) {
+                return SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "تفاصيل المنتج",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        ImageContainer(),
+                        textSpan(
+                            title: " اسم المنتج : ",
+                            data: " ${cubit.searchproduct!.title ?? ""}"),
+                        textSpan(
+                            title: "سعر المنتج : ",
+                            data: " ${cubit.searchproduct!.price ?? ""}"),
+                        textSpan(
+                            title: " تاريخ الانشاء: ",
+                            data: " ${cubit.searchproduct!.createdAt ?? ""}"),
+                        textSpan(
+                            title: " اخر تحديث : ",
+                            data: " ${cubit.searchproduct!.updatedAt ?? ""}"),
+                        const Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            "وصف المنتج",
+                            style: TextStyle(color: Colors.black, fontSize: 20),
+                          ),
+                        ),
+                        textSpan(
+                            data: "${cubit.searchproduct?.description ?? ""}"),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        buttonBack()
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Align(
-                      alignment: Alignment.center,
+                    Center(
                       child: Text(
-                        "تفاصيل المنتج",
-                        style: TextStyle(fontSize: 20),
+                        "لا يوجد لديك منتجات ",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    ImageContainer(),
-                    textSpan(
-                        title: " اسم المنتج : ",
-                        data: " ${cubit.searchproduct!.title}"),
-                    textSpan(
-                        title: "سعر المنتج : ",
-                        data: " ${cubit.searchproduct!.price}"),
-                    textSpan(
-                        title: " تاريخ الانشاء: ",
-                        data: " ${cubit.searchproduct!.createdAt}"),
-                    textSpan(
-                        title: " اخر تحديث : ",
-                        data: " ${cubit.searchproduct!.updatedAt}"),
-                    const Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        "وصف المنتج",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                    ),
-                    textSpan(data: "${cubit.searchproduct!.description}"),
-                    const SizedBox(
-                      height: 20,
                     ),
                     buttonBack()
                   ],
-                ),
-              ),
-            );
-          }
-          if (state is CacheSuccess) {
-            return SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "تفاصيل المنتج",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    ImageContainer(),
-                    textSpan(
-                        title: " اسم المنتج : ",
-                        data: " ${cubit.allProduct?.title}"),
-                    textSpan(
-                        title: "سعر المنتج : ",
-                        data: " ${cubit.allProduct?.price}"),
-                    textSpan(
-                        title: " تاريخ الانشاء:  : ",
-                        data: " ${cubit.allProduct?.createdAt}"),
-                    textSpan(
-                        title: " اخر تحديث : ",
-                        data: " ${cubit.allProduct?.updatedAt}"),
-                    const Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        "وصف المنتج",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                    ),
-                    textSpan(data: "${cubit.allProduct?.description}"),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    buttonBack()
-                  ],
-                ),
-              ),
-            );
-          } else if (state is ErrorSearch) {
-            return Center(
-              child: Column(
+                );
+              }
+            } else {
+              return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("Assets/Images/noInternet.jpg"),
-                  SizedBox(
-                    height: 10,
+                  Center(
+                    child: Text(
+                      "لا يوجد لديك منتجات ",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   buttonBack()
                 ],
-              ),
+              );
+            }
+          } else if (state is CacheSuccess) {
+            if (AppConstant.userid == cubit.allProduct!.adminId) {
+              if (cubit.allProduct != null) {
+                return SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "تفاصيل المنتج",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        ImageContainer(),
+                        textSpan(
+                            title: " اسم المنتج : ",
+                            data: " ${cubit.allProduct?.title ?? ""}"),
+                        textSpan(
+                            title: "سعر المنتج : ",
+                            data: " ${cubit.allProduct?.price ?? ""}"),
+                        textSpan(
+                            title: " تاريخ الانشاء:  : ",
+                            data: " ${cubit.allProduct?.createdAt ?? ""}"),
+                        textSpan(
+                            title: " اخر تحديث : ",
+                            data: " ${cubit.allProduct?.updatedAt ?? ""}"),
+                        const Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            "وصف المنتج",
+                            style: TextStyle(color: Colors.black, fontSize: 20),
+                          ),
+                        ),
+                        textSpan(
+                            data: "${cubit.allProduct?.description ?? ""}"),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        buttonBack()
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(
+                        "لا يوجد لديك منتجات ",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    buttonBack()
+                  ],
+                );
+              }
+            } else {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      "لا يوجد لديك منتجات ",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  buttonBack()
+                ],
+              );
+            }
+          } else if (state is ErrorSearch) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Text(
+                    "لا يوجد لديك منتجات ",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                buttonBack()
+              ],
             );
           }
           return Center(child: CircularProgressIndicator());

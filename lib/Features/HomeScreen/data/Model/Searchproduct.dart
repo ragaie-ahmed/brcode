@@ -3,6 +3,7 @@ class Searchproduct {
       this.id, 
       this.title, 
       this.barcode, 
+      this.adminId, 
       this.description, 
       this.price, 
       this.createdAt, 
@@ -12,6 +13,7 @@ class Searchproduct {
     id = json['id'];
     title = json['title'];
     barcode = json['barcode'];
+    adminId = json['admin_id'];
     description = json['description'];
     price = json['price'];
     createdAt = json['created_at'];
@@ -20,30 +22,18 @@ class Searchproduct {
   num? id;
   String? title;
   String? barcode;
+  int? adminId;
   String? description;
   String? price;
   String? createdAt;
   String? updatedAt;
-Searchproduct copyWith({  num? id,
-  String? title,
-  String? barcode,
-  String? description,
-  String? price,
-  String? createdAt,
-  String? updatedAt,
-}) => Searchproduct(  id: id ?? this.id,
-  title: title ?? this.title,
-  barcode: barcode ?? this.barcode,
-  description: description ?? this.description,
-  price: price ?? this.price,
-  createdAt: createdAt ?? this.createdAt,
-  updatedAt: updatedAt ?? this.updatedAt,
-);
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['title'] = title;
     map['barcode'] = barcode;
+    map['admin_id'] = adminId;
     map['description'] = description;
     map['price'] = price;
     map['created_at'] = createdAt;
